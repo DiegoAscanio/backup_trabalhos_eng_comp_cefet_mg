@@ -1,0 +1,59 @@
+Sequencia de tokens identificados: 
+256, var
+278, a1
+44, 44
+278, _2b3
+44, 44
+278, _a485
+259, is
+260, int
+59, 59
+257, begin
+267, in
+40, 40
+278, a1
+41, 41
+59, 59
+268, out
+40, 40
+278, a1
+43, 43
+277, literal
+41, 41
+278, b
+272, :=
+276, 98
+45, 45
+276, 4
+59, 59
+278, result
+44, 44
+61, 61
+276, 13
+45, 45
+276, 9
+59, 59
+268, out
+40, 40
+-1, -1
+41, 41
+258, end
+Tabela de Simbolos no nível 1:
+a1, a1
+result, result
+in, in
+out, out
+begin, begin
+:=, :=
+b, b
+
+65535, 65535
+Tabela de Simbolos no nível 0:
+a1, a1
+int, int
+is, is
+end, end
+var, var
+_a485, _a485
+_2b3, _2b3
+

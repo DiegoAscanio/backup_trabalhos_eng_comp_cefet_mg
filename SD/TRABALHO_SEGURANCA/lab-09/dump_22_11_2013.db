@@ -1,0 +1,25 @@
+--
+-- Table structure for table `accounts`
+--
+
+DROP TABLE IF EXISTS `accounts`;
+
+CREATE TABLE `accounts` (
+	`username` VARCHAR(25) NOT NULL,
+	`secret` VARCHAR(40) default NULL,
+	`password` VARCHAR(32) default NULL,
+	`salt` INT default 0,
+	PRIMARY KEY  (`username`),
+);
+
+--
+-- Dumping data for table `accounts`
+--
+
+INSERT INTO `accounts_contacts` VALUES 
+	('mattThorne','6655fcfadca4adff9933c07842161c65f993c9bd','7ab9495396df849963e683d724f85086',632),
+	('l1l_m3rm@id','201b8f20dd1695d7d46e80a23f0487d1cb91e255','88b4ce63d49305ffd3570c7c24c0c5b0',470),
+	('undertaker91','460b8dde3c375c9f9b87e3ab44ffce3fa1305744','66ce76c7795eb6325705fb6efe0afc1d',101),
+	('paul.dicey','97ea5599536ab294f94a47c4194c2c6d488d2725','90f441eed2c426e09ae41eb53095623e',642)
+	('admin','fa0754b9861f7065fd7c6270efb07fc6ac3b0ad8','5e815814b6c62056f25078ef388f1b53',987);
+

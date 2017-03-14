@@ -1,0 +1,155 @@
+Essa etapa consistiu em desenvolver o analisador lexico para ler arquivos 
+fontes da linguagem estudada e reportar eventuais erros lexicos existentes
+É consenso de que essa etapa pode ser realizada (e melhor implementada) 
+pelo analisador sintático, mas como o enunciado da prática explicitava que
+em caso de programa fonte com erro, o erro deveria ser reportado, então
+preferiu-se por também implementar a reportagem de erros seguindo a abordagem
+panic, que ao encontrar um erro, para a execução da analise e não prossegue
+a mesma até que o devido erro tenha sido corrigido pelo desenvolvedor.
+
+A abordagem informa o tipo de erro e em qual linha esse erro foi encontrado
+conforme requisitado no enunciado.
+
+Dada as duas formas de implementação do analisador lexico estudadas em sala 
+de aula, optou-se por utilizar a segunda forma, de codificação de comporta-
+mento direto no código, que é alternativa a implementação tradicional via 
+AFD.
+
+Para tal, foram criadas 7 classes, somente no pacote analisadorlexico, que
+são:
+
+AnalisadorLexico - que contem a logica do analisador em si, onde o arquivo
+fonte da linguagem é lido até o seu final e são gerados tokens para os le-
+xemas identificados pela linguagem, quando necessário.
+
+Tag - classe que define as constantes para os tokens
+Token - classe base para todos os tokens a serem gerados pelo Analisador
+Léxico
+IntegerConst - subclasse de Token para as constantes inteiras da linguagem
+Literal - subclasse de Token para as strings da linguagem
+Word - subclasse de Token para os identificadores e palavras reservadas da
+linguagem
+Comment - uma subclasse de Token para comentarios, que é retornada pelo 
+analisador Léxico, mas que não será aproveitado para nada pelo compilador
+por hora. Tem utilidade para representar documentação, por exemplo, nas 
+IDEs modernas, mostra-se a documentação referente a determinado método
+ou atributo de uma classe, a partir dos comentarios de documentação
+existentes no código da classe.
+
+
+o analisador lexico é atualmente utilizável executando-se a classe base/Main
+e passando como argumento o arquivo fonte a ser analisado.
+
+exemplo:
+
+$cd Compilador/out/production/Compilador # diretorio dos executaveis java
+$java base/Main <arquivo_fonte>
+
+Execuções:
+
+O primeiro arquivo analisado - 1 (Teste 1) foi analisado sem erros reportados
+no analisador lexico, ele gerou uma saida com os tokens identificados e com
+as tabelas de simbolos encontradas - dois niveis de tabela, pois existiram
+dois escopos, o primeiro, das variaveis declaradas antes do begin e o segundo
+dos simbolos encontrados entre begin e end.
+
+o arquivo teste encontra-se em testes/1
+a saída da execução encontra-se no arquivo saidas/execucao_1
+
+O segundo arquivo - 2 (Teste 2) reportou um erro de identificador mal formado
+na linha 1. Ele identificou alguns tokens e parou quando encontrou o caractere
+'_' sozinho. Corrigiu-se esse problema adicionando-se ao caractere o numero 1
+e construindo um identificador que começa com '_' seguido de letra ou digito,
+lexema reconhecido na linguagem. Salvou-se a correção, como um novo arquivo -
+testes/2_corrigido e executou-se novamente o analisador lexico agora sobre a 
+versão corrigida e novamente um novo erro foi encontrado, dessa vez na linha 
+10, onde o lexema '.' que não é reconhecido pela linguagem foi reportado. 
+Novamente corrigiu-se o erro, no arquivo testes/2_corrigido e executou-se
+novamente o analisador léxico, dessa vez sem erros e com a saida gerada
+no arquivo saidas/execucacao_2_corrigido, onde foram identificados os tokens
+e dois niveis de tabelas de simbolos - para variaveis antes do begin e para
+o escopo do begin -> end.
+
+os arquivos teste encontram-se em testes/2 e testes/2_corrigido
+a saída das execuções encontram-se nos arquivos saidas/{execucao_2,execucao_
+2_corrigido}
+
+O terceiro arquivo - 3 (Teste 3) reportou um erro de identificador mal formado
+na linha 3. Ele identificou alguns tokens e parou quando encontrou o lexema 
+soma_ que não é um identificador valido da linguagem. A correção foi efetuada,
+retirando-se o caractere invalido _ de soma e dessa vez o analisador lexico
+nao reportou erros. Foram identificados vários tokens e dessa vez, 3 niveis
+de tabelas de simbolos, por existir um escopo aninhado dentro do escopo 
+begin -> end, delimitado pelo laço do while existente no arquivo fonte.
+
+os arquivos teste encontram-se em testes/3 e testes/3_corrigido
+a saída das execuções encontram-se nos arquivos saidas/{execucao_3,execucao_
+3_corrigido}
+
+O quarto arquivo - 4 (Teste 4) reportou um lexema nao reconhecido pela lin
+guagem na linha 3. Ele identificou alguns tokens e parou quando encontrou o 
+lexema @ que não é reconhecido pela linguagem. A correção foi efetuada,
+retirando-se o caractere invalido @ e novamente analisador lexico reportou 
+erros, dessa vez, uma constante numerica mal formada na linha 3. onde existe
+um lexema de nome 1soma. Foi corrigido o problema e retirado o 1 de soma
+e o analisador lexico passou a reconhecer o lexema como identificador vali
+do soma, reportando um novo lexema desconhecido na linha 8, o caractere $.
+Esse erro também foi corrigido e então, o analisador léxico procedeu sem
+erros. A saida foi gerada no arquivo saidas/execucao_4_corrigido, onde var
+ios tokens foram identificados e dois niveis de tabela de simbolos reconhe
+cidos.
+
+os arquivos teste encontram-se em testes/4 e testes/4_corrigido
+a saída das execuções encontram-se nos arquivos saidas/{execucao_4,execucao_
+4_corrigido}
+
+O quinto arquivo - 5 (Teste 5) reportou um erro de null pointer exception
+no arquivo fonte, nao existiam erros lexicos em si, mas um erro sintatico
+que mesmo nao implementando o analisador sintatico, o compilador foi capaz
+de reconhecer pois, é implementada a funcionalidade de tabelas de simbolo
+e o compilador no passo atual ja consegue determinar delimitações de escopo
+e foi exatamente isso a causa desse erro, pois ao se analisar o arquivo 
+fonte 5, consta-se a existencia de um if não seguido por um then, e o then
+pela implementação de tabela de simbolos adotada, serve para indicar o co-
+meço de um novo escopo, mas como esse then está ausente, o compilador en-
+controu dois comandos ends e tentou fechar um escopo alem do que estava de
+limitado (como se houvessem duas tabelas de simbolo), ocorrendo aí o erro
+de null pointer exception, pois ele tentou acessar uma tabela inexistente
+na memoria. A correção aplicada foi adicionar a clausula then após o if
+e aí a execução foi normal. Vários tokens foram encontrados e 3 niveis
+de tabela de simbolos foram encontrados, sendo que 2 tabelas no mesmo
+nivel, uma para o escopo do if e outra para o escopo do else, ambas no
+nivel 2.
+
+os arquivos teste encontram-se em testes/5 e testes/5_corrigido
+a saída das execuções encontram-se nos arquivos saidas/{execucao_5,execucao_
+5_corrigido}
+
+O sexto arquivo - 6 (Teste 6) reportou um erro na linha 3, de identificador
+mal formado, e esse erro ocorreu por que o identificador tinha mais de 15 
+caraceteres. A correçao foi efetuada, optando-se por comentar a linha, para
+também testar a funcionalidade de reconhecimento de comentários do analisador
+léxico. Corrigido o erro, novamente, o compilador voltou a reportar um erro
+de null pointer exception, dessa vez por que a clausula begin nao foi de
+clarada. Corrigindo-se o erro, a analise lexica foi realizada normalmente.
+Varios tokens foram reconhecidos e 4 niveis de tabela de simbolos foram
+encontrados, existindo varios escopos para os if e else existentes.
+
+os arquivos teste encontram-se em testes/6 e testes/6_corrigido
+a saída das execuções encontram-se nos arquivos saidas/{execucao_6,execucao_
+6_corrigido}
+
+O setimo arquivo - (Teste 7) foi construido sem erros para justamente mostrar
+o funcionamento adequado do analisador. Nesse arquivo, encontram-se identifi
+cadores estranhos (mas validos) literais e comentarios e tudo funcionou per
+feitamente. Tokens foram identificados e dois niveis de tabela de simbolos 
+econtrados
+
+os arquivos teste encontram-se em testes/7 e testes/7_corrigido
+a saída das execuções encontram-se nos arquivos saidas/{execucao_7,execucao_
+7_corrigido}
+
+O oitavo foi feito somente com duas linhas - begin e end e a primeira comentada
+para demonstrar o erro das tabelas de simbolo existentes em 6 e 3. Descomenta-
+da a primeira linha, a execução foi perfeita, somente 3 tokens foram identifi
+cados  - begin, end e EOF e dois niveis de tabela de simbolos, uma para antes do escopo do begin e outra para o que seria delimitado dentro desse escopo

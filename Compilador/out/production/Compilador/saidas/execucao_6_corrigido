@@ -1,0 +1,125 @@
+Sequencia de tokens identificados: 
+256, var
+278, a
+44, 44
+278, b
+44, 44
+278, c
+44, 44
+278, maior
+259, is
+260, int
+59, 59
+-1, -1
+257, begin
+278, start
+278, read
+40, 40
+278, a
+41, 41
+59, 59
+278, read
+40, 40
+278, b
+41, 41
+59, 59
+278, read
+40, 40
+278, c
+59, 59
+278, maior
+272, :=
+276, 0
+59, 59
+262, if
+40, 40
+278, a
+62, 62
+271, and
+278, a
+62, 62
+41, 41
+263, then
+278, maior
+272, :=
+278, a
+59, 59
+264, else
+Tabela de Simbolos no nível 2:
+a, a
+maior, maior
+then, then
+:=, :=
+
+262, if
+40, 40
+278, b
+62, 62
+41, 41
+263, then
+278, maior
+272, :=
+278, b
+59, 59
+264, else
+Tabela de Simbolos no nível 3:
+maior, maior
+then, then
+:=, :=
+b, b
+
+278, maior
+272, :=
+278, c
+59, 59
+258, end
+Tabela de Simbolos no nível 3:
+maior, maior
+:=, :=
+c, c
+else, else
+
+258, end
+Tabela de Simbolos no nível 2:
+if, if
+end, end
+else, else
+b, b
+
+278, Out
+40, 40
+277, Maior idade: 
+41, 41
+59, 59
+268, out
+40, 40
+278, maior
+41, 41
+59, 59
+258, end
+Tabela de Simbolos no nível 1:
+a, a
+Out, Out
+c, c
+if, if
+end, end
+begin, begin
+out, out
+:=, :=
+start, start
+maior, maior
+and, and
+read, read
+b, b
+
+65535, 65535
+Tabela de Simbolos no nível 0:
+a, a
+is, is
+maior, maior
+end, end
+int, int
+var, var
+c, c
+b, b
+

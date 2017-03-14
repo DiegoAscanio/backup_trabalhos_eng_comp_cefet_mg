@@ -1,0 +1,84 @@
+1. 
+
+O tamanho dos hashs gerados condiz com o previsto no artigo da wikipedia
+a hash hexadecimal gerada para frase e sentença para o md5 teve tamanho 32, multiplicado por 4 (o numero de bits necessario para representar um numero hexadecimal) equivale a 128 bits previstos no md5
+as hashs hexadecimais sha geradas tiveram tamanho 40 - 160 bits e as sha 256 tamanho 64 - 256 bits
+
+Questões 2 e 3:
+
+As hashs utilizadas foram sha-1 e md5
+
+e todas foram crackeadas nos sites :/
+
+os secrets: Bucharest, Superman, octopus, Catwoman, Lisboa
+
+as senhas: 632methadone, 470sprinkled, 101crackpot, 642privileged, 987turnip com salts concatenados as senhas.
+
+Questão 4 - XOR:
+ 
+Se a mensagem for maior que o comprimento da chave, elementos da chave serão repetidos na operação xor, pois o acesso aos caracteres da chave nunca ultrapassam o tamanho da chave - key[i%len(key)].
+
+Em muitos casos, os primeiros três bytes foram 0, pois esses três primeiros bytes tanto na chave quanto na mensagem coincidiam. Se o atacante sabe que o algoritmo de cifragem utilizado é XOR, isso é ruim, pois ele sabe que a chave e a mensagem são parecidas :/
+
+Mensagem gerada pelo dicionário: the repulsive crocodile waves at the bewildered lizard
+Chave gerada pelo dicionário: the obnoxious gnu bows before the bumpy chetah
+
+Mensagem criptografada com XOR: \x00\x00\x00\x00\x1d\x07\x1e\x1a\x14\x1a\x06\x03\x16\x00\x04\x1c\x1aC\r\x0b\x1e\x1fEB\x12\x07\x19\x17\x16\x00\x15\x1cET\n\x10M\x12\x1cW\n\x04\x01\x11\x13\r\x10H\tI\x15\x03\x1c\x0b
+
+Questão 5 - RC 4:
+
+O algoritmo RC4, a cada vez que vocễ chama o objeto cipher, ele modifica o keystream.
+
+Ao tentar decryptografar não consegui, por que o keystream já havia mudado. Para isso, reinstanciei o objeto com a key original e apliquei o método decrypt. Aí sim foi possível descryptografar e penso que essa deve ser a maneira mais fácil proposta no enunciado.
+
+Comentando a linha 17, a cada vez que eu tentava criptografar a mesma mensagem, a mensagem criptografada mudava, pois, parou-se de reiniciar o keystream todas as vezes que se instanciava cipher novamente.
+
+Questão 6 - RSA - Parte 1:
+
+Após um hard reset, ocorreu um problema, pois todos os hosts smartcards tinham a mesma seed para o gerador de numeros aleatorios e consequentemente, geravam os mesmos Ps e os mesmos Qs :/. Foi proposta uma solução para inserir uma randomização após a geração do p. Porém, neste caso, todos teriam o mesmo p e um atacante que tiver acesso a algum dispositivo, conhece o P deste dispositivo e consequentmente de todos. Com isso, quando alguem envia uma chave publica para ele, ele já tem o q do enviante, uma vez que chave publica = p*q; q = chave publica / p.
+
+A solução para isso é atualizar a seed antes da geração do P.
+
+A proxima etapa ele pede para encontrar p1, p2, q1, q2
+
+para isso, assumo que p1 = p2 pois executa a versao do firmware onde p1 e p2 vao ser os mesmos gerados.
+
+partindo do principio que para o RSA, p1, p2, q1, q2 são numeros primos, que p = p1 = p2 e que n1 = p*q1, n2 = p*q2, logo, n1 e n2 tem ao menos p como um divisor em comum.
+
+usando a funcao number.GCD(n1, n2) encontrei o seguinte numero como maior divisor em comum entre n1 e n2: 
+GCD = 6740613837575126444857603781784917760207381962781391930378541587307782312288595451812363411223639312463362075422374790215072330397196442487555832150126677
+
+usando a funcao number.isPrime, descobri que o MDC entre n1 e n2 era primo também. Se esse numero é primo e esse numero é fator em comum entre n1 e n2, logo, esse numero pode ser candidato a p.
+
+dividindo n1 / p, encontrei um possivel candidato a q1. Avaliei se esse candidato era primo e constatei que era verdade, entao, p e q1 são p1 e q1.
+
+Fazendo a mesma coisa para p2 e q2, descobri que os dois são primos também.
+
+posso afirmar que os numeros encontrados são p e q, pois o unico jeito de se gerar um numero que é produto entre dois primos é somente através dos dois primos em si.
+
+então, respondendo a questão, p = p1 = p2 é:
+
+6740613837575126444857603781784917760207381962781391930378541587307782312288595451812363411223639312463362075422374790215072330397196442487555832150126677
+
+q1 é:
+
+9931746710919842441270338420890820316166850779718813258259810064676220502282845343104828787479407006993072362074837105804905654275074409889183635715594037
+
+q2 é:
+
+9642494078208502215899584879317861440730112778735292141592350712999207583263055408052503811653992443260749166808585794862036047240149710524429812863353869
+
+Questão 6 - RSA - Parte 2:
+
+Mensagens descriptogradas:
+
+Knock, knock!
+Who's there?
+Canoe!
+Canoe who?
+Canoe help me with my homework?
+
+
+
+
+

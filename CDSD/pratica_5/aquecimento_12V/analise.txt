@@ -1,0 +1,14 @@
+valor final de y: 600mV
+valor inicial de y: 297mV
+delta y: 303mV
+valor inicial + 63% de delta y: 487mV
+y(140) = 487mV
+y(0) ... y(40) = 297mV
+tau: (140s - 40s) = 100s
+H(s) = (delta y / delta u) / (tau s + 1) ->
+H(s) = 0.02525 / (100s + 1)
+
+Y(s) = U(s)*H(s)
+Y(s) = (12/s) * (0.02525/(100s + 1))
+Y(t) = L^-1 [Y(s)] + Y(0) ->
+Y(t) = 0.303 * (1 - e^-100t) + 0.297

@@ -1,0 +1,30 @@
+[System]
+Name='scale'
+Type='mamdani'
+Version=2.0
+NumInputs=1
+NumOutputs=1
+NumRules=0
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='erro'
+Range=[-100 100]
+NumMFs=3
+MF1='negativo':'trapmf',[-167 -103 -27.5 -8.75]
+MF2='estavel':'trapmf',[-27.5 -8.75 35 60]
+MF3='positivo':'trapmf',[35 60 118 172]
+
+[Output1]
+Name='acao_de_controle'
+Range=[0 1]
+NumMFs=3
+MF1='mf1':'trimf',[-0.4 0 0.4]
+MF2='mf2':'trimf',[0.1 0.5 0.9]
+MF3='mf3':'trimf',[0.6 1 1.4]
+
+[Rules]

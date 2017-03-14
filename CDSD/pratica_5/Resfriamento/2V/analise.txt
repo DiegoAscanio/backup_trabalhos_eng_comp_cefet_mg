@@ -1,0 +1,35 @@
+delta_y = y_o - y_f = 0.2
+y(t) = delta_y * e^(-tau*t) + 0.42
+
+Considerando-se que:
+e^-at para t = 1/a -> e^-1 = 0.37.
+
+y(t) = 0.2*e^(-tau*t) + 0.42
+
+Agora, encontra-se o tempo no grafico onde y vale 0.4935.
+Analisando o grafico, o tempo encontrado foi de 60s. Logo:
+(1/tau) = 60 o que implica que tau = (1/60)s = 0.0167s.
+
+Substituindo-se tau na equação, temos que:
+
+y(t) = delta_y * e^(-0.0167*t) + 0.42
+
+e pelas simulacoes, isto esta correto.
+
+Agora, a funcao de transferencia.
+
+y(t) se torna:
+
+y(t) = 0.2*e^(-0.0167*t) + 0.42 uma vez que agora t começa em 0
+
+e a entrada u(t) é um degrau de amplitude 2v.
+
+Y(s) = L[y(t)] ->
+Y(s) = 0.2 * (1/(s + 0.0167)) + 0.42/s ->
+Y(s) = (0.2*s) / (s*(s + 0.0167)) + (0.42*s + 0.007) / (s*(s + 0.0167))
+Y(s) = (0.62*s + 0.007) / (s*(s + 0.0167))
+
+U(t) = 1 -> U(s) = 1/s
+
+H(s) = Y(s) / U(s) ->
+H(s) = (0.62s + 0.007) / (s + 0.0167)

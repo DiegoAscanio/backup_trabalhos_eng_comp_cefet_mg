@@ -1,0 +1,8 @@
+var a1, _2b3, _a485 is int;
+begin
+  in(a1);
+  out(a1 + {literal})
+  b := 98-4;
+  result ,= 13 - 9;
+  out(%aaa%)
+end

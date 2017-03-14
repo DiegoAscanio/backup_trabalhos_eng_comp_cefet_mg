@@ -1,0 +1,15 @@
+app Teste5
+
+    int j, k;
+    real a, j
+   start
+      read (j);
+      read (k);
+      if (k != 0)
+         result := j/k
+      else
+         result := 0
+      end;
+
+      write(res);
+   stop

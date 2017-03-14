@@ -1,0 +1,80 @@
+Sequencia de tokens identificados: 
+256, var
+278, j
+44, 44
+278, k
+259, is
+260, int
+59, 59
+278, a
+44, 44
+278, j
+278, real
+59, 59
+257, begin
+278, read
+40, 40
+278, j
+41, 41
+59, 59
+278, read
+40, 40
+278, K
+41, 41
+59, 59
+262, if
+40, 40
+278, k
+60, 60
+276, 0
+41, 41
+263, then
+278, result
+272, :=
+278, j
+47, 47
+264, else
+Tabela de Simbolos no nível 2:
+j, j
+then, then
+:=, :=
+result, result
+
+278, result
+272, :=
+276, 0
+258, end
+Tabela de Simbolos no nível 2:
+:=, :=
+result, result
+else, else
+
+59, 59
+268, out
+40, 40
+278, result
+41, 41
+59, 59
+258, end
+Tabela de Simbolos no nível 1:
+j, j
+out, out
+end, end
+begin, begin
+if, if
+read, read
+result, result
+K, K
+k, k
+
+65535, 65535
+Tabela de Simbolos no nível 0:
+j, j
+a, a
+int, int
+end, end
+real, real
+var, var
+is, is
+k, k
+
